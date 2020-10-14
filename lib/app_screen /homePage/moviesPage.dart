@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/movies/MoviesUpcomingList.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/movies/MoviesWatchList.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/movies/moviesUpcomingList.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/movies/moviesWatchList.dart';
+import 'package:movie_mock_list/const/constants.dart';
 
 class  Movies extends StatefulWidget {
   @override
@@ -42,8 +43,8 @@ class _State extends State<Movies> with TickerProviderStateMixin {
                   labelStyle: TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),
                   tabs:
                   [
-                    Tab(child:Text("WATCH LIST",)),
-                    Tab(child:Text("UPCOMING"))
+                    Tab(child:Text(WATCH_LIST,)),
+                    Tab(child:Text(UPCOMING))
                   ],
 
                 ),

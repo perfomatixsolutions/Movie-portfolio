@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/moviedetails.dart';
-import 'package:movie_mock_list/model/MovieDetailsModel.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
-import '../../discoverMorePage.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/movieDetails.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/model/movieDetailsModel.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
+import '../discoverMorePage.dart';
 import 'package:sqflite/sqflite.dart';
+
 class MoviesWatchList extends StatefulWidget {
   @override
   _MoviesWatchListState createState() => _MoviesWatchListState();
@@ -98,7 +100,7 @@ class _MoviesWatchListState extends State<MoviesWatchList> with WidgetsBindingOb
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Text("DISCOVER MOVIES", style: TextStyle(
+                              child: Text(DISCOVER_MOVIES, style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),),
@@ -114,7 +116,7 @@ class _MoviesWatchListState extends State<MoviesWatchList> with WidgetsBindingOb
                 children: [
                   Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text("Movies are here", style: TextStyle(
+                      child: Text(NO_MOVIES, style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 20),)),
@@ -127,7 +129,7 @@ class _MoviesWatchListState extends State<MoviesWatchList> with WidgetsBindingOb
                   Padding(
                       padding: EdgeInsets.all(35),
                       child: Text(
-                        "Build  your collections  and keep track of what you want to watch",
+                       DISCOVER_MOVIES_TO_WATCH,
                         style: TextStyle(color: Colors.black, fontSize: 15),
                         textAlign: TextAlign.center,)),
                   Padding(
@@ -151,7 +153,7 @@ class _MoviesWatchListState extends State<MoviesWatchList> with WidgetsBindingOb
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Text("ADD YOUR MOVIES", style: TextStyle(
+                          child: Text(ADD_MOVIES, style: TextStyle(
                               fontSize: 15,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),),

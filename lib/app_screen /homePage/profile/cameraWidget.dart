@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/model/ProfileDetailsModel.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
-import 'package:path/path.dart' show join;
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/model/profileDetailsModel.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
+import 'package:movie_mock_list/utils/utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 
@@ -22,7 +22,7 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
     case CameraLensDirection.external:
       return Icons.camera;
   }
-  throw ArgumentError('Unknown lens direction');
+  throw ArgumentError(UNKNOWN_LENS_DIRECTION);
 }
 
 class CameraWidget extends StatefulWidget {
@@ -91,7 +91,7 @@ class CameraState extends State<CameraWidget> {
                                 children: [
                                   Icon(Icons.check,color: Colors.white,size: 20,),
                                   Container(width: 10,),
-                                  Text("Save",style: TextStyle(color:  Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                                  Text(SAVE,style: TextStyle(color:  Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
                                 ],
                               ),
                               onTap: ()
@@ -124,14 +124,14 @@ class CameraState extends State<CameraWidget> {
     controller.addListener(() {
       if (mounted) setState(() {});
       if (controller.value.hasError) {
-        showInSnackBar('Camera error ${controller.value.errorDescription}');
+        showInSnackBar('$CAMERA_ERROR ${controller.value.errorDescription}');
       }
     });
 
     try {
       await controller.initialize();
     } on CameraException catch (e) {
-      showInSnackBar('Camera error ${e}');
+      showInSnackBar('$CAMERA_ERROR $e');
     }
 
     if (mounted) {
@@ -160,7 +160,7 @@ class CameraState extends State<CameraWidget> {
 
     if (cameras != null) {
       if (cameras.isEmpty) {
-        return const Text('No camera found');
+        return const Text(NO_CAMERA);
       } else {
         for (CameraDescription cameraDescription in cameras) {
           toggles.add(
@@ -242,7 +242,7 @@ class CameraState extends State<CameraWidget> {
       return null;
     }
     final Directory extDir = await getApplicationDocumentsDirectory();
-    final String dirPath = '${extDir.path}/Pictures/flutter_test';
+    final String dirPath = '${extDir.path}/Pictures/movie_test';
     await Directory(dirPath).create(recursive: true);
     final String filePath = '$dirPath/${timestamp()}.jpg';
 
@@ -289,7 +289,7 @@ class CameraState extends State<CameraWidget> {
     details.imgPath = imagePath;
     db.insertImagePath(details).then((value) {
       setState(() {
-        Navigator.pop(context,true);
+     moveToLastScreen(context);
       });
     });
   }

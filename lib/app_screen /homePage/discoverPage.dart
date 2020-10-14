@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/discoverMorePage.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/discoverMorePage.dart';
+import 'package:movie_mock_list/const/constants.dart';
 import 'package:movie_mock_list/model/movieModel.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
-import 'package:movie_mock_list/utils/api/api.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
-
-import 'homePage/moviedetails.dart';
-import 'homePage/search/SearchPage.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
+import 'package:movie_mock_list/utils/utils.dart';
+import 'package:movie_mock_list/services/api/api.dart';
+import 'movieDetails.dart';
+import 'search/searchPage.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -36,9 +36,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
   @override
   void initState() {
     super.initState();
-    _getMovieName();
-    _updateMoveList();
-    _updateShowList();
+    getMovieName();
+    updateMoveList();
+    updateShowList();
   }
 
   @override
@@ -75,7 +75,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                             height: 25,
                           ),
                           Text(
-                            "Search",
+                            SEARCH,
                             style: TextStyle(
                                 color: Colors.grey.shade700, fontSize: 15),
                           )
@@ -108,7 +108,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Trending  Movies',
+                      TRENDING_MOVIES,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -120,7 +120,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                   builder: (context) => DiscoverMore(1)));
                         },
                         child: Text(
-                          "See All",
+                          SEE_ALL,
                           style: TextStyle(color: Colors.indigo),
                         ))
                   ],
@@ -170,7 +170,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                         }
                                       }));
                                       if (result == true) {
-                                        _getMovieName();
+                                        getMovieName();
                                       }
                                     },
                                   ),
@@ -194,7 +194,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                               db.deleteMovieUsingName(
                                                   _trendingMovieList
                                                       .search[index].Title);
-                                              _getMovieName();
+                                              getMovieName();
                                               print(
                                                   "deleted :${_trendingMovieList.search[index].Title}");
                                             } else {
@@ -205,7 +205,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                                   .then((value) {
                                                 if (value.Title != null) {
                                                   db.insertMovie(value,"movies");
-                                                  _getMovieName();
+                                                  getMovieName();
                                                 }
                                               });
 
@@ -241,7 +241,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Trending  Shows',
+                      TRENDING_SHOW,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -253,7 +253,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                   builder: (context) => DiscoverMore(0)));
                         },
                         child: Text(
-                          "See All",
+                          SEE_ALL,
                           style: TextStyle(color: Colors.indigo),
                         ))
                   ],
@@ -306,7 +306,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                           }
                                         }));
                                         if (result == true) {
-                                          _getMovieName();
+                                          getMovieName();
                                         }
                                       }),
                                   Padding(
@@ -326,7 +326,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                             db.deleteMovieUsingName(
                                                 _trendingShowPopularList
                                                     .search[index].Title);
-                                            _getMovieName();
+                                            getMovieName();
                                             print(
                                                 "deleted :${_trendingShowPopularList.search[index].Title}");
                                           } else {
@@ -337,7 +337,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                                 .then((value) {
                                               if (value.Title != null) {
                                                 db.insertMovie(value,"shows");
-                                                _getMovieName();
+                                                getMovieName();
                                               }
                                             });
 
@@ -417,7 +417,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Discover More",
+                                  DISCOVER_MORE,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       color: Colors.black,
@@ -425,7 +425,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "New shows and movies are waiting for you",
+                                  NEW_SHOW_AND_MOVIES,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     color: Colors.black,
@@ -461,7 +461,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                     top: 20.0, bottom: 0.0, left: 10, right: 10),
                 child: Align(
                   child: Text(
-                    'Recent  Activity',
+                    RECENT_ACTIVITY,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   alignment: Alignment.topLeft,
@@ -552,8 +552,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
       ),
     );
   }
-
-  _updateMoveList() {
+/// update show list
+  updateMoveList() {
     _trendingMovieListApi.fetchPopularList("joy").then((value) {
       setState(() {
         _trendingMovieList = value;
@@ -562,7 +562,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
     });
   }
 
-  _updateShowList() {
+  /// update show list
+  updateShowList() {
     _trendingShowListApi.fetchPopularList("witcher").then((value) {
       setState(() {
         _trendingShowPopularList = value;
@@ -583,7 +584,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   /// fun to get movie name
 
-  _getMovieName() {
+  getMovieName() {
     DatabaseHelper db = new DatabaseHelper();
     db.getMovieName("").then((value) {
       setState(() {

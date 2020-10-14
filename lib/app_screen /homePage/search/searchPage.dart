@@ -1,14 +1,12 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:movie_mock_list/const/constants.dart';
 import 'package:movie_mock_list/model/movieModel.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
-import 'package:movie_mock_list/utils/api/api.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
-
-import '../moviedetails.dart';
+import 'package:movie_mock_list/utils/utils.dart';
+import 'package:movie_mock_list/services/api/api.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
+import '../movieDetails.dart';
 
 
 
@@ -61,13 +59,13 @@ class _SearchPageState extends State<SearchPage> {
                                 ],
                               ),
                             ),
-                            IconButton(icon: Icon(_checkMovieName(_moviePopularList[index].Title)?Icons.check_box:Icons.add_box_outlined,color: Colors.yellow,size: 30,), onPressed: (){
+                            IconButton(icon: Icon(checkMovieName(_moviePopularList[index].Title)?Icons.check_box:Icons.add_box_outlined,color: Colors.yellow,size: 30,), onPressed: (){
                               DatabaseHelper db = new DatabaseHelper();
-                              if (_checkMovieName(
+                              if (checkMovieName(
                                   _moviePopularList[index].Title)) {
                                 db.deleteMovieUsingName(
                                     _moviePopularList[index].Title);
-                                _getMovieName();
+                                getMovieName();
                                 print ("deleted :${_moviePopularList[index].Title}");
                               }
                               else  {
@@ -75,7 +73,7 @@ class _SearchPageState extends State<SearchPage> {
                                     .then((value) {
                                   if(value.Title != null) {
                                     db.insertMovie(value,"movies");
-                                    _getMovieName();
+                                    getMovieName();
                                   }
                                 });
 
@@ -91,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                         onTap: () async {
                             var result =  await Navigator.push(context, MaterialPageRoute(builder: (context)
                             {
-                              if(_checkMovieName(_moviePopularList[index].Title)) {
+                              if(checkMovieName(_moviePopularList[index].Title)) {
                                 return MovieDetails(
                                     _moviePopularList[index].Title, false,"movies");
                               }
@@ -103,7 +101,7 @@ class _SearchPageState extends State<SearchPage> {
                             }));
                             if(result == true)
                               {
-                                _getMovieName();
+                                getMovieName();
                               }
                           },
 
@@ -143,7 +141,7 @@ class _SearchPageState extends State<SearchPage> {
           cursorColor: Colors.yellow,
           validator: (String value) {
             if (value.isEmpty) {
-              return "Search";
+              return SEARCH;
             }
             else {
               return value;
@@ -156,7 +154,7 @@ class _SearchPageState extends State<SearchPage> {
               }
               else
                 {
-                  _updateList();
+                  updateList();
                 }
             });
           },
@@ -180,14 +178,14 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    _getMovieName();
-    _updateList();
+    getMovieName();
+    updateList();
     controller = new ScrollController()
-      ..addListener(_scrollListener);
+      ..addListener(scrollListener);
     setState(() {});
   }
 
-  _scrollListener() {
+  scrollListener() {
     if (totalRecord == _moviePopularListIndex) {
       return;
     }
@@ -195,12 +193,12 @@ class _SearchPageState extends State<SearchPage> {
     if (controller.position.maxScrollExtent == controller.position.pixels) {
       setState(() {
         isPageLoading =true;
-        _updateList();
+        updateList();
       });
     }
   }
 
-  _updateList() {
+  updateList() {
     fetchMovieList.fetchPopularList("era")
         .then((value) {
       setState(() {
@@ -233,13 +231,13 @@ class _SearchPageState extends State<SearchPage> {
             _moviePopularList = value.search;
           _moviePopularListIndex = _moviePopularList.length-1;
         }
-        _getMovieName();
+        getMovieName();
       });
     });
   }
 
   ///fun to check whether  movie list in watchList
-  bool _checkMovieName(String movie){
+  bool checkMovieName(String movie){
     if (_movieNameList.firstWhere((element) => element == movie,orElse: () => null)!= null)
     {
       return true;
@@ -252,8 +250,7 @@ class _SearchPageState extends State<SearchPage> {
 
   /// fun to get movie name
 
-  _getMovieName(){
-
+  getMovieName(){
     DatabaseHelper db = new DatabaseHelper();
     db.getMovieName("").then((value){
       setState(() {

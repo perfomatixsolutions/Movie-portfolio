@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/favouritemovies.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/shows/ShowsUpcomingList.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/shows/ShowsWatchList.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/shows/showsUpcomingList.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/shows/showsWatchList.dart';
+import 'package:movie_mock_list/const/constants.dart';
 
 class  Shows extends StatefulWidget {
   @override
@@ -43,8 +43,8 @@ class _State extends State<Shows> with TickerProviderStateMixin {
               labelStyle: TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),
               tabs:
               [
-                Tab(child:Text("WATCH LIST",)),
-                Tab(child:Text("UPCOMING"))
+                Tab(child:Text(WATCH_LIST,)),
+                Tab(child:Text(UPCOMING))
               ],
 
             ),

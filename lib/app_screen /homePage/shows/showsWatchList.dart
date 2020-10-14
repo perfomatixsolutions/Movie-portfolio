@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/model/MovieDetailsModel.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
-import '../../discoverMorePage.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/model/movieDetailsModel.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
+import '../discoverMorePage.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../moviedetails.dart';
+import '../movieDetails.dart';
 
 class ShowsWatchList extends StatefulWidget {
 
@@ -104,7 +105,7 @@ class _ShowsWatchListState extends State<ShowsWatchList> {
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Text("DISCOVER SHOWS", style: TextStyle(
+                                child: Text(DISCOVER_SHOWS, style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),),
@@ -121,7 +122,7 @@ class _ShowsWatchListState extends State<ShowsWatchList> {
                   children: [
                     Padding(
                         padding: EdgeInsets.all(10),
-                        child: Text("You have no shows to watch!",
+                        child: Text(NO_SHOW,
                           style: TextStyle(color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 20),)),
@@ -132,7 +133,7 @@ class _ShowsWatchListState extends State<ShowsWatchList> {
                             child: Image(image: AssetImage('assets/tv.png'),))),
                     Padding(
                         padding: EdgeInsets.all(10),
-                        child: Text("Discover shows to watch",
+                        child: Text(DISCOVER_SHOWS_TO_WATCH,
                           style: TextStyle(color: Colors.black, fontSize: 15),)),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -155,7 +156,7 @@ class _ShowsWatchListState extends State<ShowsWatchList> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: Text("DISCOVER SHOWS", style: TextStyle(
+                            child: Text(DISCOVER_SHOWS, style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),),
@@ -170,6 +171,8 @@ class _ShowsWatchListState extends State<ShowsWatchList> {
 
         ));
   }
+
+  /// fun to update showList
 
   void updateListView() async {
     Future<Database> dbFuture = databaseHelper.initializeDatabase();

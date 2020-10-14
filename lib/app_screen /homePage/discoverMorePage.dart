@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/discover/DiscoverShows.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/discover/DiscovermMovies.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/discover/discoverShows.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/discover/discovermMovies.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/utils/utils.dart';
 
 
 
@@ -27,10 +29,10 @@ class _DiscoverMoreState extends State<DiscoverMore> {
         appBar: AppBar(
           elevation: 0.0,
           leading: IconButton(icon :Icon(Icons.keyboard_arrow_down,color: Colors.black,size: 30,),onPressed: (){
-            moveToLastScreen();
+            moveToLastScreen(context);
           },),
           backgroundColor: Colors.white,
-          title: Text("Discover more",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+          title: Text(DISCOVER_MORE,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
           centerTitle: true,
           actions: [
             IconButton(icon: Icon(Icons.more_vert,color: Colors.black,size: 20,),onPressed: (){
@@ -56,8 +58,8 @@ class _DiscoverMoreState extends State<DiscoverMore> {
                     labelStyle: TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),
                     tabs:
                     [
-                      Tab(child:Text("SHOWS",)),
-                      Tab(child:Text("MOVIES"))
+                      Tab(child:Text(SHOWS,)),
+                      Tab(child:Text(MOVIES))
                     ],
 
                   ),
@@ -72,15 +74,11 @@ class _DiscoverMoreState extends State<DiscoverMore> {
           ),
     ),
           onWillPop: (){
-        return  moveToLastScreen();
+        return  moveToLastScreen(context);
           },
         ));
 
 
 
-  }
-  moveToLastScreen() {
-
-    Navigator.pop(context,true);
   }
 }

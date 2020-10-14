@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/moviedetails.dart';
 import 'package:movie_mock_list/app_screen%20/login%20/signIn.dart';
 import 'package:movie_mock_list/app_screen%20/login%20/signup.dart';
-import 'package:movie_mock_list/model/movieModel.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/widgets/blurEffect.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,10 +13,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   AnimationController controller;
-  var _scrollContainer = ScrollController();
-  final _height = 100.0;
+  var _scrollController = ScrollController();
   Animation<double> animation;
-  Timer _timer;
+  Timer _scrollAnimationTimer;
   int _count = 0;
   int _scrollCount = 0;
   var _icon = [Icons.ondemand_video, Icons.thumb_up_alt, Icons.check_circle];
@@ -31,46 +27,21 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   ];
   var _opacity =1.0;
   var _blurOpacity =false;
-  List<Search> _movieViewAllList = List<Search>();
-  int _movieViewAllListIndex = 0;
 
 
   @override
   Widget build(BuildContext context) {
+    _setUpTimerDuration();
 
-    var size = MediaQuery
-        .of(context)
-        .size;
-    Timer(
-      Duration(seconds: 1),
-      () => _scrollContainer.jumpTo(_scrollCount.toDouble() * 10),
-    );
 
     return Scaffold(
       body:  Container(
         height: double.infinity,
         color: Colors.black54,
         child: Stack(children: [
-      /*  Container(
-      child: StaggeredGridView.countBuilder(
-          crossAxisCount: 8,
-          controller: _scrollContainer,
-          scrollDirection: Axis.vertical,
-          itemCount: 80,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-
-
-              return Image(
-                  image:
-                  NetworkImage('https://cache.desktopnexus.com/thumbseg/1272/1272680-bigthumbnail.jpg'));
-
-          },
-          staggeredTileBuilder: (index) => new StaggeredTile.fit(2)),
-        ),*/
 
         SingleChildScrollView(
-          controller: _scrollContainer,
+          controller: _scrollController,
           child: Container(
             height: MediaQuery.of(context).size.height+100,
             width:  double.infinity,
@@ -94,9 +65,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             children: [
               SizedBox(height: 75),
               FadeTransition(
-                //duration: const Duration(seconds: 3),
                 opacity: animation,
-                child: _createText(_scrollContainer, context,
+                child: _createText(_scrollController, context,
                     _content[_count], _icon[_count]),
               ),
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -109,7 +79,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                     child: Text(
-                      "GET STARTED",
+                      GET_STARTED,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -127,13 +97,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
-                            text: ' Have an account?',
+                            text: AlREADY_HAD_ACCOUNT,
                             style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.white,
                                 decoration: TextDecoration.none)),
                         TextSpan(
-                            text: ' SIGN IN',
+                            text: ' $SIGN_IN',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
@@ -155,30 +125,57 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     );
   }
 
-  void _toEnd() {
-    // NEW
-    new Timer.periodic(
-      const Duration(seconds: 11),
-      (Timer timer) => setState(
-        () {
-          if (_count >= 2) {
-            timer.cancel();
-          } else {
-            _count = _count + 1;
-          }
-        },
-      ),
-    );
-  }
+
+
+
 
   @override
   void initState() {
     super.initState();
-    _scrollContainer = new ScrollController(
+    _setupScrollAnimation();
+    _setupFadeTransitionAnimation();
+    Timer.periodic(
+      const Duration(seconds: 6),
+          (Timer timer) => setState(() {
+        _scrollCount = _scrollCount + 1;
+      }),
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollAnimationTimer.cancel();
+  }
+
+  /// fun to setup ScrollAnimation
+  ///
+  _setupScrollAnimation()
+  {
+    _scrollController = new ScrollController(
       // NEW
       initialScrollOffset: 10.0, // NEW
       keepScrollOffset: true, // NEW
     );
+    _scrollAnimationTimer = new Timer.periodic(
+      const Duration(seconds: 11),
+          (Timer timer) => setState(
+            () {
+          _scrollCount = _count + 1;
+          if (_count >= 2) {
+            timer.cancel();
+          } else {
+            _count = _count + 1;
+            _scrollController.jumpTo(_scrollCount.toDouble() * 10);
+          }
+        },
+
+      ),
+    );
+  }
+
+  /// fun to setup FadeTransitionAnimation
+  ///
+  _setupFadeTransitionAnimation(){
     controller =
         AnimationController(duration: const Duration(seconds: 5), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
@@ -193,45 +190,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       }
     });
 
-   /* _fetchPopularList().then((value) {
-      setState(() {
-        for (var i in value.search) {
-          _movieViewAllList.add(i);
-          _movieViewAllList.add(i);
-          _movieViewAllList.add(i);
-        }
-        _movieViewAllListIndex = _movieViewAllList.length - 1;
-      });
-      _scrollContainer.notifyListeners();
-    });*/
-
     controller.forward();
-    _timer = new Timer.periodic(
-      const Duration(seconds: 11),
-      (Timer timer) => setState(
-        () {
-          _scrollCount = _count + 1;
-          if (_count >= 2) {
-            timer.cancel();
-          } else {
-            _count = _count + 1;
-          }
-        },
-      ),
-    );
-
-    var _timer2 = new Timer.periodic(
-      const Duration(seconds: 6),
-      (Timer timer) => setState(() {
-        _scrollCount = _scrollCount + 1;
-      }),
-    );
   }
 
-  @override
-  void dispose() {
-    _timer.cancel();
-  }
+  /// fun to  setup SignUp Navigation
+
   Future navigationToSignUpPage()  async{
     setState(() {
       this._opacity =0.0;
@@ -261,6 +224,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       });
     }
   }
+
+  /// fun to  setup SignIn Navigation
 
   Future navigationToSignInPage()  async{
     setState(() {
@@ -292,44 +257,39 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       });
     }
   }
-}
 
+  /// fun for setting Timer for scroll when  the widgets created
 
+   _setUpTimerDuration() {
+    Timer(
+      Duration(seconds: 1),
+          () => _scrollController.jumpTo(_scrollCount.toDouble() * 10),
+    );
+  }
 
-Widget _createText(ScrollController scrollController, BuildContext context,
-    String data, IconData icon) {
-  return Column(
-    children: [
-      RaisedButton(
-          color: Colors.black,
-          shape: CircleBorder(side: BorderSide.none),
-          onPressed: () {},
-          child: Icon(icon, size: 20, color: Colors.white)),
-      SizedBox(height: 10),
-      Text(
-        '$data',
-        style: TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
-      )
-    ],
-  );
-}
+  /// fun to update text for fadetransition Property
 
-class BlurryEffect extends StatelessWidget {
-  final double opacity;
-  final double blurry;
-  final Color shade;  BlurryEffect(this.opacity,this.blurry,this.shade);    @override  Widget build(BuildContext context) {
-    return Container(
-      child: ClipRect(
-        child:  BackdropFilter(
-          filter:  ImageFilter.blur(sigmaX:10, sigmaY:10),
-          child:  Container(
-            width: double.infinity,
-            height:  double.infinity,
-            color: Colors.black.withOpacity(0.1),
-          ),
-        ),
-      ),
+  Widget _createText(ScrollController scrollController, BuildContext context,
+      String data, IconData icon) {
+    return Column(
+      children: [
+        RaisedButton(
+            color: Colors.black,
+            shape: CircleBorder(side: BorderSide.none),
+            onPressed: () {},
+            child: Icon(icon, size: 20, color: Colors.white)),
+        SizedBox(height: 10),
+        Text(
+          '$data',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+        )
+      ],
     );
   }
 }
+
+
+
+
+

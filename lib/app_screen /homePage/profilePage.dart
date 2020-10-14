@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/profile/CameraWidget.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/profile/cameraWidget.dart';
 import 'package:movie_mock_list/app_screen%20/login%20/loginPage.dart';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
+import 'package:movie_mock_list/utils/utils.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   
    var _settingsList = ['Custom Lists','Followers','Following','Comments','Stats'];
-   String  imgpath ;
+   String  _imgPath ;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -76,8 +76,8 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.all(Radius.circular(50)),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: imgpath == null? AssetImage(
-                                'assets/default_profile.png'):FileImage(File(imgpath))
+                            image: _imgPath == null? AssetImage(
+                                'assets/default_profile.png'):FileImage(File(_imgPath))
                         ),
                       ),
                       width:100,
@@ -268,7 +268,7 @@ class _ProfileState extends State<Profile> {
       setState(()
       {
         debugPrint("value : ${value.imgPath}");
-        imgpath = value.imgPath;
+        _imgPath = value.imgPath;
       })
     });
   }

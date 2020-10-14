@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:movie_mock_list/app_screen%20/DiscoverPage.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/ProfilePage.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/ShowsPage.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/favouritemovies.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/discoverPage.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/profilePage.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/showsPage.dart';
+import 'package:movie_mock_list/const/constants.dart';
 
 import 'moviesPage.dart';
 
@@ -33,19 +32,19 @@ class _MainScreenState extends State<MainScreen> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.live_tv,color: _page == 0? Colors.black:Colors.grey,size: 30,),
-              title: new Text('Shows',style:TextStyle(color: _page == 0? Colors.black:Colors.grey)),
+              title: new Text(NAV_SHOWS,style:TextStyle(color: _page == 0? Colors.black:Colors.grey)),
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.movie_creation_outlined,color: _page == 1? Colors.black:Colors.grey,size: 30),
-              title: new Text('Movies',style:TextStyle(color: _page == 1? Colors.black:Colors.grey)),
+              title: new Text(NAV_MOVIE,style:TextStyle(color: _page == 1? Colors.black:Colors.grey)),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search,color : _page == 2? Colors.black:Colors.grey,size: 30),
-                title: Text('Discover',style:TextStyle(color:  _page == 2? Colors.black:Colors.grey,))
+                title: Text(NAV_DISCOVER,style:TextStyle(color:  _page == 2? Colors.black:Colors.grey,))
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person,color: _page == 3? Colors.black:Colors.grey,size: 30),
-                title: Text('Profile',style:TextStyle(color:  _page == 3? Colors.black:Colors.grey,))
+                title: Text(NAV_PROFILE,style:TextStyle(color:  _page == 3? Colors.black:Colors.grey,))
             )
           ],
           onTap: (index) {

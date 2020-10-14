@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_mock_list/const/constants.dart';
 
-import '../../discoverMorePage.dart';
+import '../discoverMorePage.dart';
 class ShowsUpcomingList extends StatefulWidget {
   @override
   _WatchListState createState() => _WatchListState();
@@ -18,7 +19,7 @@ class _WatchListState extends State<ShowsUpcomingList> {
           children: [
             Padding(
                 padding: EdgeInsets.all(10),
-                child: Text("You have no upcoming shows!",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),)),
+                child: Text(NO_UPCOMING_SHOWS,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),)),
             Padding(
                 padding: EdgeInsets.all(20),
                 child: Container(
@@ -26,7 +27,7 @@ class _WatchListState extends State<ShowsUpcomingList> {
                     child: Image(image: AssetImage('assets/tv.png'),))),
             Padding(
                 padding: EdgeInsets.all(10),
-                child: Text("Discover shows to watch",style: TextStyle(color: Colors.black,fontSize: 15),)),
+                child: Text(DISCOVER_SHOWS_TO_WATCH,style: TextStyle(color: Colors.black,fontSize: 15),)),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: RaisedButton(
@@ -39,7 +40,7 @@ class _WatchListState extends State<ShowsUpcomingList> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Text("DISCOVER SHOWS",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
+                    child: Text(DISCOVER_SHOWS,style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
                   )),
             ),
 

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/model/MovieDetailsModel.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
-import 'package:movie_mock_list/utils/api/api.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/model/movieDetailsModel.dart';
+import 'package:movie_mock_list/services/api/api.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
+import 'package:movie_mock_list/utils/utils.dart';
 
 
+// ignore: must_be_immutable
 class MovieDetails extends StatefulWidget {
   String movie;
   bool _dataFromApi;
@@ -36,7 +38,7 @@ class _MovieDetailsState extends State<MovieDetails> {
 
     return WillPopScope(
      onWillPop: (){
-       return  moveToLastScreen();
+       return  moveToLastScreen(context);
      },
       child: Scaffold(
         body: SafeArea(
@@ -60,7 +62,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       underline: SizedBox(),
                                       icon:Icon(
                       Icons.more_vert, color: Colors.white, size: 20,) ,
-                                      items: <String>[_dataFromApi?'Add to WatchList':'Remove from WatchList'].map((String value) {
+                                      items: <String>[_dataFromApi?ADD_MOVIE_TO_WATCHLIST:REMOVE_MOVIE_FROM_WATCHLIST].map((String value) {
                                         return new DropdownMenuItem<String>(
                                           value: value,
                                           child: new Text(value,style: TextStyle(color: Colors.white,fontSize: 15),),
@@ -74,11 +76,11 @@ class _MovieDetailsState extends State<MovieDetails> {
                                         setState(() {
                                         watchList = 1;
                                         });
-                                        moveToLastScreen();
+                                        moveToLastScreen(context);
                                         }
                                         else{
                                         db.deleteMovie(_moviePopularList.id);
-                                        moveToLastScreen();
+                                        moveToLastScreen(context);
                                         }}
                                       ,
                                     ),
@@ -132,7 +134,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       Icon(Icons.remove_red_eye_outlined,
                                         color: Colors.grey, size: 20,),
                                       SizedBox(width: 10,),
-                                      Text("Not watched", style: TextStyle(
+                                      Text(NOT_WATCHED, style: TextStyle(
                                           color: Colors.black, fontSize: 20),)
                                     ]
                                 ),
@@ -152,7 +154,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                         Container(height: 0.5,color: Colors.grey,),
                         Padding(
                           padding: const EdgeInsets.only( left :10,top: 10,bottom: 2),
-                          child: Text("PLOT",textAlign: TextAlign.start,
+                          child: Text(PLOT,textAlign: TextAlign.start,
                             style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
                         ),
                         Padding(
@@ -181,10 +183,7 @@ class _MovieDetailsState extends State<MovieDetails> {
     );
 
   }
-   moveToLastScreen() {
 
-    Navigator.pop(context,true);
-  }
 
   @override
   void initState() {

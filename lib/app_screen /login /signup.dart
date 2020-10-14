@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_mock_list/app_screen%20/homePage/homePage.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/utils/utils.dart';
 
 class SingUp extends StatefulWidget {
   @override
@@ -62,7 +63,7 @@ class _SingUpState extends State<SingUp> {
                                         'assets/facebook_logo.png'),
                                     height: 20)),
                             Text(
-                              "Sign up with Facebook",
+                              SIGN_UP_WITH_FACEBOOK,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -92,7 +93,7 @@ class _SingUpState extends State<SingUp> {
                                     image: AssetImage('assets/google_logo.png'),
                                     height: 20)),
                             Text(
-                              "Sign up with Google",
+                              SIGN_UP_WITH_GOOGLE,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -171,7 +172,7 @@ class _SingUpState extends State<SingUp> {
                               alignment: FractionalOffset.bottomCenter,
                               child: GestureDetector(
                                 child: Text(
-                                  "SEE MORE OPTIONS",
+                                  SEE_MORE_OPTIONS,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.yellowAccent,
@@ -202,13 +203,13 @@ class _SingUpState extends State<SingUp> {
                                       .style,
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: 'By Signing up,you are agree to our',
+                                        text: BY_SIGNING,
                                         style: TextStyle(
                                             fontSize: 10,
                                             color: Colors.white,
                                             decoration: TextDecoration.none)),
                                     TextSpan(
-                                        text: ' Terms & Privacy Policy',
+                                        text: TERMS_AND_PRIVACY,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 10,

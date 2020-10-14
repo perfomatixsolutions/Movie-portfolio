@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:movie_mock_list/model/movieModel.dart';
-import 'package:movie_mock_list/utils/api/api.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
+import 'package:movie_mock_list/services/api/api.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
 
-import '../moviedetails.dart';
+import '../movieDetails.dart';
 
 class DiscoverShows extends StatefulWidget {
   @override

@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/moviedetails.dart';
-import 'package:movie_mock_list/model/MovieDetailsModel.dart';
+import 'package:movie_mock_list/app_screen%20/homePage/movieDetails.dart';
 import 'package:movie_mock_list/model/movieModel.dart';
-import 'package:movie_mock_list/utils/api/api.dart';
-import 'package:movie_mock_list/utils/dbHelper.dart';
+import 'package:movie_mock_list/services/api/api.dart';
+import 'package:movie_mock_list/services/database/dbHelper.dart';
 
 
 
@@ -50,36 +48,6 @@ class _DiscoverMoviesState extends State<DiscoverMovies> {
                         setState(() {
                           _moviePopularList.removeAt(index);
                         });
-                        /*  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext bc){
-                      return Container(
-                        child: new Wrap(
-                          children: <Widget>[
-                            new ListTile(
-                                leading: new Icon(Icons.keyboard_hide),
-                                title: new Text('Hide',style: TextStyle(color: Colors.black),),
-                                onTap: () => {
-                                setState(() {
-          _moviePopularList.removeAt(index);
-          Navigator.pop(context);
-          }),
-                                }
-                            ),
-                            new ListTile(
-                              leading: new Icon(Icons.exit_to_app),
-                              title: new Text('Exit',style:TextStyle(color: Colors.black)),
-                              onTap: () => {
-                                setState(() {
-                                  Navigator.pop(context);
-                                }),
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                );*/
 
                       }
                     },

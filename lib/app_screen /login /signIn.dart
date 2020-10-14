@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_mock_list/app_screen%20/homePage/homePage.dart';
-import 'package:movie_mock_list/utils/Utils.dart';
+import 'package:movie_mock_list/const/constants.dart';
+import 'package:movie_mock_list/utils/utils.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -10,7 +11,6 @@ class SignIn extends StatefulWidget {
 
 class _SignUpState extends State<SignIn> {
   var _formkey = GlobalKey<FormState>();
-  var _minPadding = 5.0;
   FocusNode fieldNode = FocusNode();
   TextEditingController username =TextEditingController();
   TextEditingController password =TextEditingController();
@@ -32,52 +32,14 @@ class _SignUpState extends State<SignIn> {
     _userFocus.addListener(_onUserNameFocusChange);
     _passwordFocus.addListener(_onPasswordFocusChange);
   }
-  void _onUserNameFocusChange(){
-    setState(() {
-      _passwordIcon =_color[0];
-    if(_userFocus.hasFocus == true)
-      {
 
-          _userIcon =_color[1];
-
-      }
-    });
-  }
-  void _onPasswordFocusChange(){
-    setState(() {
-      _userIcon =_color[0];
-    if(_passwordFocus.hasFocus == true)
-    {
-
-        _passwordIcon =_color[1];
-
-    }
-    });
-
-  }
-     passwordVisibility()
-   {
-     setState(() {
-       if(_mMaskedPasswordDisabled)
-         {
-           _mMaskedPasswordIcon =Icons.remove_red_eye;
-
-         }
-       else
-         {
-           _mMaskedPasswordIcon =Icons.remove_red_eye_outlined;
-         }
-       _mMaskedPasswordDisabled = ! _mMaskedPasswordDisabled;
-
-     });
-   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
             appBar: AppBar(elevation :1.0,backgroundColor:Colors.transparent,title:  Text("Sign in"),centerTitle: true ,leading: GestureDetector(child: Icon(Icons.arrow_circle_down),onTap: (){
-              moveToLastScreen();
+              moveToLastScreen(context);
             },),),
             backgroundColor: Colors.black.withOpacity(0.5),
             //color: Colors.transparent,
@@ -140,7 +102,7 @@ class _SignUpState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(child: Container(height:0.5,color: Colors.white,),flex: 3,),
-                      Flexible(child: Text(" OR ",style: TextStyle(color: Colors.white)),flex: 1,),
+                      Flexible(child: Text(" $OR ",style: TextStyle(color: Colors.white)),flex: 1,),
                       Flexible(child: Container(height:0.5,color: Colors.white,),flex: 3,)
                     ],
                   ),
@@ -160,7 +122,7 @@ class _SignUpState extends State<SignIn> {
                             style: TextStyle(color: Colors.white),
 
                             validator: (String value) {
-                              if(value.isEmpty) {return "Username or Email";}
+                              if(value.isEmpty) {return USERNAME;}
                               else{
                                 return value;
                               }
@@ -168,7 +130,7 @@ class _SignUpState extends State<SignIn> {
 
                             },
                             decoration: InputDecoration(
-                                hintText: "Username or Email",
+                                hintText: USERNAME,
                                 errorStyle: TextStyle(color: Colors.white, fontSize: 15.0),
                                 hintStyle: TextStyle(color: Colors.grey, fontSize: 15.0),
                                 labelStyle: TextStyle(color: Colors.white, fontSize: 15.0),
@@ -194,7 +156,7 @@ class _SignUpState extends State<SignIn> {
                               keyboardType: TextInputType.text,
                               style: TextStyle(color: Colors.white),
                               validator: (String value) {
-                                if(value.isEmpty) {return "Password";}
+                                if(value.isEmpty) {return PASSWORD;}
                                 else{
                                   return value;
                                 }
@@ -203,7 +165,7 @@ class _SignUpState extends State<SignIn> {
                               },
                               decoration: InputDecoration(
 
-                                  hintText: 'Password',
+                                  hintText: PASSWORD,
                                   errorStyle: TextStyle(color: Colors.white, fontSize: 15.0),
                                   hintStyle: TextStyle(color: Colors.grey, fontSize: 15.0),
                                   labelStyle: TextStyle(color: Colors.white, fontSize: 15.0),
@@ -257,7 +219,7 @@ class _SignUpState extends State<SignIn> {
           //body: Text("ih"),
         ),
         onWillPop: (){
-          return moveToLastScreen();}
+          return moveToLastScreen(context);}
     );
   }
 
@@ -267,10 +229,57 @@ class _SignUpState extends State<SignIn> {
     _passwordFocus.dispose();
   }
 
-  moveToLastScreen() {
 
-    Navigator.pop(context,true);
+  /// username focus Listener
+
+  _onUserNameFocusChange(){
+    setState(() {
+      _passwordIcon =_color[0];
+      if(_userFocus.hasFocus == true)
+      {
+
+        _userIcon =_color[1];
+
+      }
+    });
   }
+
+  /// password focus Listener
+
+  _onPasswordFocusChange(){
+    setState(() {
+      _userIcon =_color[0];
+      if(_passwordFocus.hasFocus == true)
+      {
+
+        _passwordIcon =_color[1];
+
+      }
+    });
+
+  }
+
+  /// fun to password visibility
+
+  passwordVisibility() {
+    setState(() {
+      if(_mMaskedPasswordDisabled)
+      {
+        _mMaskedPasswordIcon =Icons.remove_red_eye;
+
+      }
+      else
+      {
+        _mMaskedPasswordIcon =Icons.remove_red_eye_outlined;
+      }
+      _mMaskedPasswordDisabled = ! _mMaskedPasswordDisabled;
+
+    });
+  }
+
+
+  /// fun to navigate to  homeScreen
+
   moveToHomeScreen() {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return MainScreen();

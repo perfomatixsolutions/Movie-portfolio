@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:movie_mock_list/model/MovieDetailsModel.dart';
-import 'package:movie_mock_list/model/ProfileDetailsModel.dart';
+import 'package:movie_mock_list/model/movieDetailsModel.dart';
+import 'package:movie_mock_list/model/profileDetailsModel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 

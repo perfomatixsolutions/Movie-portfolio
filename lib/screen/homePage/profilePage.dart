@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/profile/cameraWidget.dart';
-import 'package:movie_mock_list/app_screen%20/login%20/loginPage.dart';
+import 'package:movie_mock_list/screen/homePage/profile/cameraWidget.dart';
+import 'package:movie_mock_list/screen/login%20/loginPage.dart';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';

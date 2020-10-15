@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/shows/showsUpcomingList.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/shows/showsWatchList.dart';
+import 'package:movie_mock_list/screen/homePage/shows/showsUpcomingList.dart';
+import 'package:movie_mock_list/screen/homePage/shows/showsWatchList.dart';
 import 'package:movie_mock_list/const/constants.dart';
 
 class  Shows extends StatefulWidget {

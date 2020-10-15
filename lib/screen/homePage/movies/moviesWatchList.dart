@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/movieDetails.dart';
+import 'package:movie_mock_list/screen/homePage/movieDetails.dart';
 import 'package:movie_mock_list/const/constants.dart';
 import 'package:movie_mock_list/model/movieDetailsModel.dart';
 import 'package:movie_mock_list/services/database/dbHelper.dart';

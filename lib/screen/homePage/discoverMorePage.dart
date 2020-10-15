@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/discover/discoverShows.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/discover/discovermMovies.dart';
+import 'package:movie_mock_list/screen/homePage/discover/discoverShows.dart';
+import 'package:movie_mock_list/screen/homePage/discover/discovermMovies.dart';
 import 'package:movie_mock_list/const/constants.dart';
 import 'package:movie_mock_list/utils/utils.dart';
 

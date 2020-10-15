@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:movie_mock_list/app_screen%20/login%20/signIn.dart';
-import 'package:movie_mock_list/app_screen%20/login%20/signup.dart';
+import 'package:movie_mock_list/screen/login%20/signIn.dart';
+import 'package:movie_mock_list/screen/login%20/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_mock_list/const/constants.dart';
 import 'package:movie_mock_list/widgets/blurEffect.dart';

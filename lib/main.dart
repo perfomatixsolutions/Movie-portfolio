@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_mock_list/const/constants.dart';
-import 'package:movie_mock_list/widgets/SplashScreen.dart';
+import 'package:movie_mock_list/screen/login%20/loginPage.dart';
+import 'package:splashscreen/splashscreen.dart';
+
 
 void main()
 {
@@ -19,7 +21,16 @@ class MovieApp extends StatefulWidget {
 class _MovieAppState extends State<MovieApp> {
   @override
   Widget build(BuildContext context) {
-    return splash();
+    return Center(
+        child: SplashScreen(
+        seconds: 5,
+        backgroundColor: Colors.white,
+        image: Image.asset('assets/movie_mock_list_launching.gif'),
+    photoSize: 200.0,
+    loadingText: Text("Loading"),
+    navigateAfterSeconds: LoginPage(),
+    ),
+    );
   }
 }
 

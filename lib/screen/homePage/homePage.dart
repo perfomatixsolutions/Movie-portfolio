@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/discoverPage.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/profilePage.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/showsPage.dart';
+import 'package:movie_mock_list/screen/homePage/discoverPage.dart';
+import 'package:movie_mock_list/screen/homePage/profilePage.dart';
+import 'package:movie_mock_list/screen/homePage/showsPage.dart';
 import 'package:movie_mock_list/const/constants.dart';
 
 import 'moviesPage.dart';

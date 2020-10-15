@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/movies/moviesUpcomingList.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/movies/moviesWatchList.dart';
+import 'package:movie_mock_list/screen/homePage/movies/moviesUpcomingList.dart';
+import 'package:movie_mock_list/screen/homePage/movies/moviesWatchList.dart';
 import 'package:movie_mock_list/const/constants.dart';
 
 class  Movies extends StatefulWidget {

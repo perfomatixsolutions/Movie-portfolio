@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/movieDetails.dart';
+import 'package:movie_mock_list/screen/homePage/movieDetails.dart';
 import 'package:movie_mock_list/model/movieModel.dart';
 import 'package:movie_mock_list/services/api/api.dart';
 import 'package:movie_mock_list/services/database/dbHelper.dart';

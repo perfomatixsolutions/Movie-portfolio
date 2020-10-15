@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mock_list/app_screen%20/homePage/homePage.dart';
+import 'package:movie_mock_list/screen/homePage/homePage.dart';
 import 'package:movie_mock_list/const/constants.dart';
 import 'package:movie_mock_list/utils/utils.dart';
 

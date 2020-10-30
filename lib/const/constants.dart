@@ -3,7 +3,7 @@
 
   const MOVIE_LIST_API = "http://www.omdbapi.com/?s=galaxy&page=1&apikey=aedc0d06";
 
-  const APP_NAME = "Movie Time";
+  const APP_NAME = "Movie Portfolio";
 
   const MOVIE_ALERT_DESCRIPTION = "WILL BE SOON";
 

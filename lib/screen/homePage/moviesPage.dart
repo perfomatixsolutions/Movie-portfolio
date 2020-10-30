@@ -27,6 +27,7 @@ class _State extends State<Movies> with TickerProviderStateMixin {
     });
   }
 
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(

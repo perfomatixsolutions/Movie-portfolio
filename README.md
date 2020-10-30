@@ -1,5 +1,5 @@
-# Movie Time
-<B>Movie Time</B> is a sample  flutter applicaton which  provided revelant informations regarding shows and movies.The app builds with an  impressive UI  that makes user's to use it more easily and convinently  throughout the flow.App comprises of  4 Main features(<B>Shows,Movies,Discover & Profile</B>).<br>
+# Movie PortFolio
+<B>Movie PortFolio</B> is a sample  flutter applicaton which  provided revelant informations regarding shows and movies.The app builds with an  impressive UI  that makes user's to use it more easily and convinently  throughout the flow.App comprises of  4 Main features(<B>Shows,Movies,Discover & Profile</B>).<br>
 
 <B>Shows</b><br>
 shows the shows from watchlist and upcoming shows<br>
